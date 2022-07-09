@@ -1,0 +1,327 @@
+{
+	"info": {
+		"_postman_id": "32d5a4d5-05e6-4971-a5ed-c5fc7a32fd0a",
+		"name": "Weight",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "3771148"
+	},
+	"item": [
+		{
+			"name": "List",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{HTTP_HOST}}/v1/weights",
+					"host": [
+						"{{HTTP_HOST}}"
+					],
+					"path": [
+						"v1",
+						"weights"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "List",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{HTTP_HOST}}/v1/weights",
+							"host": [
+								"{{HTTP_HOST}}"
+							],
+							"path": [
+								"v1",
+								"weights"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Date",
+							"value": "Sat, 28 May 2022 14:02:08 GMT"
+						},
+						{
+							"key": "Content-Length",
+							"value": "161"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"status\": \"success\",\n    \"message\": \"\",\n    \"data\": {\n        \"weights\": [\n            {\n                \"date\": \"2022-05-21T00:00:00Z\",\n                \"max\": 3,\n                \"min\": 2,\n                \"difference\": 1\n            }\n        ],\n        \"average\": {\n            \"max\": 3,\n            \"min\": 2,\n            \"difference\": 1\n        }\n    }\n}"
+				}
+			]
+		},
+		{
+			"name": "Create",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"date\": \"2022-05-22\",\n    \"max\": 3,\n    \"min\": 2\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{HTTP_HOST}}/v1/weights",
+					"host": [
+						"{{HTTP_HOST}}"
+					],
+					"path": [
+						"v1",
+						"weights"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Create",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"date\": \"2022-05-22\",\n    \"max\": 3,\n    \"min\": 2\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{HTTP_HOST}}/v1/weights",
+							"host": [
+								"{{HTTP_HOST}}"
+							],
+							"path": [
+								"v1",
+								"weights"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Date",
+							"value": "Sun, 29 May 2022 21:45:58 GMT"
+						},
+						{
+							"key": "Content-Length",
+							"value": "46"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"status\": \"success\",\n    \"message\": \"\",\n    \"data\": null\n}"
+				}
+			]
+		},
+		{
+			"name": "Read",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{HTTP_HOST}}/v1/weights/{{DATE}}",
+					"host": [
+						"{{HTTP_HOST}}"
+					],
+					"path": [
+						"v1",
+						"weights",
+						"{{DATE}}"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Read",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{HTTP_HOST}}/v1/weights/{{DATE}}",
+							"host": [
+								"{{HTTP_HOST}}"
+							],
+							"path": [
+								"v1",
+								"weights",
+								"{{DATE}}"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Date",
+							"value": "Sat, 28 May 2022 14:04:18 GMT"
+						},
+						{
+							"key": "Content-Length",
+							"value": "115"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"status\": \"success\",\n    \"message\": \"\",\n    \"data\": {\n        \"weight\": {\n            \"date\": \"2022-05-22T00:00:00Z\",\n            \"max\": 3,\n            \"min\": 2,\n            \"difference\": 1\n        }\n    }\n}"
+				}
+			]
+		},
+		{
+			"name": "Update",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"max\": 3,\n    \"min\": 2\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{HTTP_HOST}}/v1/weights/{{DATE}}",
+					"host": [
+						"{{HTTP_HOST}}"
+					],
+					"path": [
+						"v1",
+						"weights",
+						"{{DATE}}"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Update",
+					"originalRequest": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"max\": 3,\n    \"min\": 2\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{HTTP_HOST}}/v1/weights/{{DATE}}",
+							"host": [
+								"{{HTTP_HOST}}"
+							],
+							"path": [
+								"v1",
+								"weights",
+								"{{DATE}}"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Date",
+							"value": "Sat, 28 May 2022 14:05:20 GMT"
+						},
+						{
+							"key": "Content-Length",
+							"value": "46"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"status\": \"success\",\n    \"message\": \"\",\n    \"data\": null\n}"
+				}
+			]
+		},
+		{
+			"name": "Delete",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "{{HTTP_HOST}}/v1/weights/{{DATE}}",
+					"host": [
+						"{{HTTP_HOST}}"
+					],
+					"path": [
+						"v1",
+						"weights",
+						"{{DATE}}"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Delete",
+					"originalRequest": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{HTTP_HOST}}/v1/weights/{{DATE}}",
+							"host": [
+								"{{HTTP_HOST}}"
+							],
+							"path": [
+								"v1",
+								"weights",
+								"{{DATE}}"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Date",
+							"value": "Sat, 28 May 2022 14:05:44 GMT"
+						},
+						{
+							"key": "Content-Length",
+							"value": "46"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"status\": \"success\",\n    \"message\": \"\",\n    \"data\": null\n}"
+				}
+			]
+		}
+	]
+}
