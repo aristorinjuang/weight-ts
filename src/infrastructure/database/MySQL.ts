@@ -1,7 +1,7 @@
-import Repository from './Repository';
+import Repository from '../../repository/Repository';
 import { Connection, MysqlError } from 'mysql';
-import Weight from '../entity/Weight';
-import Weights from '../entity/Weights';
+import Weight from '../../entity/Weight';
+import Weights from '../../entity/Weights';
 
 export default class MySQL implements Repository {
   private connection: Connection;

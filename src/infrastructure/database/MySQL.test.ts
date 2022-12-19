@@ -1,9 +1,9 @@
 import mysql, { Connection } from 'mysql';
 import sinon, { SinonMock } from 'sinon';
-import Repository from './Repository';
+import Repository from '../../repository/Repository';
 import MySQL from './MySQL';
-import Weight from '../entity/Weight';
-import Weights from '../entity/Weights';
+import Weight from '../../entity/Weight';
+import Weights from '../../entity/Weights';
 
 describe('test MySQL repository', () => {
   let connection: Connection = mysql.createConnection({host: 'localhost'});
