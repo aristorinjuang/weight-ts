@@ -1,7 +1,7 @@
 import  Repository from '../../repository/Repository';
 import Usecase from '../../usecase/Usecase';
 import { Router, Request, Response } from 'express';
-import JSON from '../../factory/JSON';
+import WeightsJSON from './WeightsJSON';
 import Weight from '../../entity/Weight';
 import { body, param, validationResult, Result, ValidationError } from 'express-validator';
 
@@ -16,7 +16,7 @@ export default (repository: Repository, usecase: Usecase): Router => {
         'status': 'success',
         'message': '',
         'data': {
-          'weights': JSON.weights(usecase.weights),
+          'weights': new WeightsJSON(usecase.weights).json(),
           'average': {
             'max': usecase.averageMax(),
             'min': usecase.averageMin(),

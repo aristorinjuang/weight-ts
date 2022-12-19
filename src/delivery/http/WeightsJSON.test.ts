@@ -1,12 +1,12 @@
-import Weight from '../entity/Weight';
-import JSON from './JSON';
+import Weight from '../../entity/Weight';
+import WeightsJSON from './WeightsJSON';
 
 describe('test JSON factory', () => {
   test('weights JSON should be equal with params of weight entities', () => {
     let date: Date = new Date();
     let w1: Weight = new Weight(date, 2, 1);
     let weights: Weight[] = new Array<Weight>(w1);
-    let json = JSON.weights(weights)
+    let json = new WeightsJSON(weights).json()
 
     expect(json.length).toBe(1);
     expect(json[0].date).toBe(date);
