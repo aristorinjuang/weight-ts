@@ -1,6 +1,6 @@
 import Weight from './Weight';
 
-describe('test weight entity', () => {
+describe('test weight', () => {
   let date: Date = new Date();
   let weight: Weight = new Weight(date, 2, 1);
 
@@ -12,5 +12,9 @@ describe('test weight entity', () => {
 
   test('max is 2, min is 1, difference should be 1', () => {
     expect(weight.difference()).toBe(1)
+  })
+
+  test('max cannot be equal or lower than min', () => {
+    expect(() => new Weight(date, 1, 2)).toThrowError()
   })
 })

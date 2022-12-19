@@ -4,7 +4,7 @@ import Weight from './Weight'
 describe('test weights', () => {
   describe('basic functions', () => {
     it('should be defined', () => {
-      let weights = new Weights();
+      let weights: Weights = new Weights();
 
       expect(weights).toBeDefined();
     })
@@ -31,7 +31,7 @@ describe('test weights', () => {
     let w1: Weight = new Weight(date, 2, 1);
     let w2: Weight = new Weight(date, 3, 2);
     let w3: Weight = new Weight(date, 4, 3);
-    let weights = new Weights(Array<Weight>(w1, w2, w3));
+    let weights: Weights = new Weights(Array<Weight>(w1, w2, w3));
 
     test('average max', () => {
       expect(weights.averageMax()).toBe(3);
@@ -52,7 +52,7 @@ describe('test weights', () => {
     let w2: Weight = new Weight(date, 3, 2);
     let w3: Weight = new Weight(date, 4, 3);
     let w4: Weight = new Weight(date, 6, 5);
-    let weights = new Weights(Array<Weight>(w1, w2, w3));
+    let weights: Weights = new Weights(Array<Weight>(w1, w2, w3));
 
     weights.addWeight(w4);
 

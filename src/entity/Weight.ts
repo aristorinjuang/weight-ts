@@ -4,6 +4,10 @@ export default class Weight {
   private _min: number;
 
   constructor(date: Date, max: number, min: number) {
+    if (max <= min) {
+      throw new Error('max cannot be equal or lower than min')
+    }
+
     this._date = date;
     this._max = max;
     this._min = min;
