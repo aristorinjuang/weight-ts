@@ -1,26 +1,26 @@
 import  Repository from '../../repository/Repository';
-import Usecase from '../../usecase/Usecase';
 import { Router, Request, Response } from 'express';
 import WeightsJSON from './WeightsJSON';
 import Weight from '../../entity/Weight';
+import Weights from '../../entity/Weights';
 import { body, param, validationResult, Result, ValidationError } from 'express-validator';
 
-export default (repository: Repository, usecase: Usecase): Router => {
+export default (repository: Repository): Router => {
   const router: Router = Router();
 
   router.get('/', async (_: Request, res: Response): Promise<void> => {
     try {
-      usecase.weights = await repository.list()
+      let weights: Weights = await repository.list()
 
       res.status(200).json({
         'status': 'success',
         'message': '',
         'data': {
-          'weights': new WeightsJSON(usecase.weights).json(),
+          'weights': new WeightsJSON(weights).json(),
           'average': {
-            'max': usecase.averageMax(),
-            'min': usecase.averageMin(),
-            'difference': usecase.averageDifference()
+            'max': weights.averageMax(),
+            'min': weights.averageMin(),
+            'difference': weights.averageDifference()
           }
         }
       }).end()

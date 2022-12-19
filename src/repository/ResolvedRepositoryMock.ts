@@ -1,5 +1,6 @@
-import Repository, { Weights } from './Repository';
+import Repository from './Repository';
 import Weight from '../entity/Weight';
+import Weights from '../entity/Weights';
 
 export default class ResolvedRepositoryMock implements Repository {
   private date: Date;
@@ -12,7 +13,7 @@ export default class ResolvedRepositoryMock implements Repository {
 
   public async list(): Promise<Weights> {
     let promise: Promise<Weights> = new Promise((resolve) => {
-      let weights: Weights = new Array<Weight>(this.weight);
+      let weights: Weights = new Weights(new Array<Weight>(this.weight));
 
       resolve(weights);
     })

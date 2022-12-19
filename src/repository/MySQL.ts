@@ -1,6 +1,7 @@
-import Repository, { Weights } from './Repository';
+import Repository from './Repository';
 import { Connection, MysqlError } from 'mysql';
 import Weight from '../entity/Weight';
+import Weights from '../entity/Weights';
 
 export default class MySQL implements Repository {
   private connection: Connection;
@@ -11,7 +12,7 @@ export default class MySQL implements Repository {
 
   public async list(): Promise<Weights> {
     let promise: Promise<Weights> = new Promise((resolve, reject) => {
-      let weights: Weights = [];
+      let weights: Weights = new Weights()
       this.connection.query(
         'SELECT date, max, min FROM weights ORDER BY date DESC',
         (err: MysqlError | null, result: any,) => {
@@ -21,7 +22,7 @@ export default class MySQL implements Repository {
 
           if (result !== undefined && result !== null && result.length) {
             for (let weight of result) {
-              weights.push(new Weight(weight.date, weight.max, weight.min));
+              weights.addWeight(new Weight(weight.date, weight.max, weight.min));
             }
           }
 

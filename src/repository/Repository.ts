@@ -1,6 +1,5 @@
 import Weight from '../entity/Weight';
-
-export type Weights = Weight[];
+import Weights from '../entity/Weights';
 
 export default interface Repository {
   list(): Promise<Weights>

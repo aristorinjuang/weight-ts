@@ -1,5 +1,6 @@
-import Repository, { Weights } from './Repository';
+import Repository from './Repository';
 import Weight from '../entity/Weight';
+import Weights from '../entity/Weights';
 
 export default class RejectedRepositoryMock implements Repository {
   public async list(): Promise<Weights> {

@@ -1,4 +1,3 @@
-import Usecase from '../../usecase/Usecase';
 import express, { Express, Router as ExpressRouter } from 'express';
 import Router from './Router';
 import Handler from './Handler';
@@ -8,12 +7,10 @@ import RejectedRepositoryMock from '../../repository/RejectedRepositoryMock';
 import request from 'supertest';
 
 describe('test HTTP handler', () => {
-  const usecase: Usecase = new Usecase();
-
   describe('test return 200, 400, and 404', () => {
     const date: Date = new Date('2022-05-22');
     const repository: Repository = new ResolvedRepositoryMock();
-    const router: ExpressRouter = Router(Handler(repository, usecase));
+    const router: ExpressRouter = Router(Handler(repository));
     const app: Express = express();
 
     app.use(express.json());
@@ -170,7 +167,7 @@ describe('test HTTP handler', () => {
 
   describe('test return 500', () => {
     const repository: Repository = new RejectedRepositoryMock();
-    const router: ExpressRouter = Router(Handler(repository, usecase));
+    const router: ExpressRouter = Router(Handler(repository));
     const app: Express = express();
 
     app.use(express.json());

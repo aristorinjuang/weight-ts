@@ -1,4 +1,4 @@
-import { Weights } from '../../repository/Repository';
+import Weights from '../../entity/Weights';
 
 type weight = {
   date: Date,
@@ -15,7 +15,7 @@ export default class WeightsJSON {
   constructor(weights: Weights) {
     this._weights = Array<weight>()
   
-    for (let w of weights) {
+    for (let w of weights.getWeights()) {
       this._weights.push({
         date: w.date,
         max: w.max,

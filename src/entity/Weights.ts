@@ -26,6 +26,10 @@ export default class Weights {
     this._differences += weight.difference();
   }
 
+  public getWeights(): Weight[] {
+    return this._weights
+  }
+
   public averageMax(): number {
     return this._maxs / this._weights.length;
   }
