@@ -2,7 +2,7 @@ require('dotenv').config()
 
 import mysql, { Connection } from 'mysql';
 import Repository from './repository/Repository';
-import MySQL from './repository/MySQL';
+import MySQL from './infrastructure/database/MySQL';
 import Handler from './delivery/http/Handler';
 import Router from './delivery/http/Router';
 import { Router as ExpressRouter } from 'express';
