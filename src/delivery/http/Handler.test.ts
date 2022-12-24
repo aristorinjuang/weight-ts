@@ -2,14 +2,21 @@ import express, { Express, Router as ExpressRouter } from 'express';
 import Router from './Router';
 import Handler from './Handler';
 import Repository from '../../repository/Repository';
-import ResolvedRepositoryMock from '../../repository/ResolvedRepositoryMock';
-import RejectedRepositoryMock from '../../repository/RejectedRepositoryMock';
 import request from 'supertest';
+import Weight from '../../entity/Weight';
+import Weights from '../../entity/Weights';
 
 describe('test HTTP handler', () => {
-  describe('test return 200, 400, and 404', () => {
+  describe('test return 200 and 400', () => {
     const date: Date = new Date('2022-05-22');
-    const repository: Repository = new ResolvedRepositoryMock();
+    const weight: Weight = new Weight(date, 2, 1);
+    const repository: Repository = {
+      list: jest.fn().mockReturnValueOnce(new Weights(new Array<Weight>(weight))),
+      create: jest.fn().mockResolvedValueOnce(() => Promise.resolve()),
+      read: jest.fn().mockReturnValueOnce(weight),
+      update: jest.fn().mockResolvedValueOnce(() => Promise.resolve()),
+      delete: jest.fn().mockResolvedValueOnce(() => Promise.resolve())
+    };
     const router: ExpressRouter = Router(Handler(repository));
     const app: Express = express();
 
@@ -96,16 +103,6 @@ describe('test HTTP handler', () => {
       expect(res.body.data).toMatchObject({});
     })
 
-    test('GET /v1/weights/:date with no weight should return 404', async () => {
-      const res = await request(app).get('/v1/weights/2022-05-23');
-  
-      expect(res.header['content-type']).toBe('application/json; charset=utf-8');
-      expect(res.statusCode).toBe(404);
-      expect(res.body.status).toBe('error');
-      expect(res.body.message).toBe('the weight does not exists');
-      expect(res.body.data).toMatchObject({});
-    })
-
     test('PUT /v1/weights/:date 200', async () => {
       const data = {
         'max': 3,
@@ -165,8 +162,39 @@ describe('test HTTP handler', () => {
     })
   })
 
+  describe('test return 404', () => {
+    const repository: Repository = {
+      list: jest.fn(),
+      create: jest.fn(),
+      read: jest.fn().mockReturnValueOnce(null),
+      update: jest.fn(),
+      delete: jest.fn()
+    };
+    const router: ExpressRouter = Router(Handler(repository));
+    const app: Express = express();
+
+    app.use(express.json());
+    app.use('/', router);
+
+    test('GET /v1/weights/:date with no weight should return 404', async () => {
+      const res = await request(app).get('/v1/weights/2022-05-23');
+  
+      expect(res.header['content-type']).toBe('application/json; charset=utf-8');
+      expect(res.statusCode).toBe(404);
+      expect(res.body.status).toBe('error');
+      expect(res.body.message).toBe('the weight does not exists');
+      expect(res.body.data).toMatchObject({});
+    })
+  })
+
   describe('test return 500', () => {
-    const repository: Repository = new RejectedRepositoryMock();
+    const repository: Repository = {
+      list: jest.fn().mockRejectedValueOnce(() => Promise.reject(new Error('failed to list weights'))),
+      create: jest.fn().mockRejectedValueOnce(() => Promise.reject(new Error('failed to create a weight'))),
+      read: jest.fn().mockRejectedValueOnce(() => Promise.reject(new Error('failed to read a weight'))),
+      update: jest.fn().mockRejectedValueOnce(() => Promise.reject(new Error('failed to update a weight'))),
+      delete: jest.fn().mockRejectedValueOnce(() => Promise.reject(new Error('failed to delete a weight')))
+    };
     const router: ExpressRouter = Router(Handler(repository));
     const app: Express = express();
 
